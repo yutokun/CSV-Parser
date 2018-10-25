@@ -9,21 +9,26 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-public class CSVParser
+public static class CSVParser
 {
 	public static List<List<string>> LoadFromPath(string path)
 	{
 		var data = File.ReadAllText(path);
-		return LoadFromString(data);
+		return Parse(ref data);
 	}
 
 	public static List<List<string>> LoadFromString(string data)
+	{
+		return Parse(ref data);
+	}
+
+	static List<List<string>> Parse(ref string data)
 	{
 		var sheet = new List<List<string>>();
 		var row = new List<string>();
 		var cell = new StringBuilder();
 		var afterQuote = false;
-		var isInsideQuote = false;
+		var insideQuote = false;
 		var readyToEndQuote = false;
 
 		// TODO : コードパスがひじょーにアレなので見やすく改良
@@ -31,7 +36,7 @@ public class CSVParser
 		foreach (var character in data)
 		{
 			// Inside the quotation marks.
-			if (isInsideQuote)
+			if (insideQuote)
 			{
 				if (afterQuote)
 				{
@@ -45,7 +50,7 @@ public class CSVParser
 					{
 						// Non-consecutive quotes : End of the quotation.
 						afterQuote = false;
-						isInsideQuote = false;
+						insideQuote = false;
 
 						if (character == ',')
 						{
@@ -87,7 +92,7 @@ public class CSVParser
 				else if (character == '"')
 				{
 					afterQuote = true;
-					isInsideQuote = true;
+					insideQuote = true;
 				}
 				else
 				{
