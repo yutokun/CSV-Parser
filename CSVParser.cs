@@ -13,8 +13,8 @@ public static class CSVParser
 {
 	public static List<List<string>> LoadFromPath(string path, Encoding encoding = null)
 	{
-		var enc = encoding ?? Encoding.UTF8;
-		var data = File.ReadAllText(path, enc);
+		encoding = encoding ?? Encoding.UTF8;
+		var data = File.ReadAllText(path, encoding);
 		return Parse(ref data);
 	}
 
