@@ -11,9 +11,10 @@ using System.Text;
 
 public static class CSVParser
 {
-	public static List<List<string>> LoadFromPath(string path)
+	public static List<List<string>> LoadFromPath(string path, Encoding encoding = null)
 	{
-		var data = File.ReadAllText(path);
+		var enc = encoding ?? Encoding.UTF8;
+		var data = File.ReadAllText(path, enc);
 		return Parse(ref data);
 	}
 
