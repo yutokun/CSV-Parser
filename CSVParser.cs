@@ -116,8 +116,12 @@ public static class CSVParser
 			}
 		}
 
-		AddCell(ref row, ref cell);
-		AddRow(ref sheet, ref row);
+		// Add last line except blank line
+		if (row.Count != 0 || cell.Length != 0)
+		{
+			AddCell(ref row, ref cell);
+			AddRow(ref sheet, ref row);
+		}
 
 		return sheet;
 	}
