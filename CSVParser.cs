@@ -116,6 +116,9 @@ public static class CSVParser
 			}
 		}
 
+		AddCell(ref row, ref cell);
+		AddRow(ref sheet, ref row);
+
 		return sheet;
 	}
 
