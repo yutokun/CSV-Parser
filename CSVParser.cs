@@ -77,16 +77,19 @@ public static class CSVParser
 
 					readyToEndQuote = false;
 				}
-				else if (character == '"')
-				{
-					// A quot mark inside the quotation.
-					// Determine by the next character.
-					afterQuote = true;
-					readyToEndQuote = true;
-				}
 				else
 				{
-					cell.Append(character);
+					if (character == '"')
+					{
+						// A quot mark inside the quotation.
+						// Determine by the next character.
+						afterQuote = true;
+						readyToEndQuote = true;
+					}
+					else
+					{
+						cell.Append(character);
+					}
 				}
 			}
 			else
