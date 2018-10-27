@@ -11,6 +11,12 @@ using System.Text;
 
 public static class CSVParser
 {
+	/// <summary>
+	/// Load CSV data from specified path.
+	/// </summary>
+	/// <param name="path">CSV file path.</param>
+	/// <param name="encoding">Type of text encoding. (default UTF-8)</param>
+	/// <returns>Nested list that CSV parsed.</returns>
 	public static List<List<string>> LoadFromPath(string path, Encoding encoding = null)
 	{
 		encoding = encoding ?? Encoding.UTF8;
@@ -18,6 +24,11 @@ public static class CSVParser
 		return Parse(ref data);
 	}
 
+	/// <summary>
+	/// Load CSV data from string.
+	/// </summary>
+	/// <param name="data">CSV string</param>
+	/// <returns>Nested list that CSV parsed.</returns>
 	public static List<List<string>> LoadFromString(string data)
 	{
 		return Parse(ref data);
