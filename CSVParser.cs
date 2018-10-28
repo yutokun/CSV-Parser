@@ -21,7 +21,7 @@ public static class CSVParser
 	{
 		encoding = encoding ?? Encoding.UTF8;
 		var data = File.ReadAllText(path, encoding);
-		return Parse(ref data);
+		return Parse(data);
 	}
 
 	/// <summary>
@@ -31,10 +31,10 @@ public static class CSVParser
 	/// <returns>Nested list that CSV parsed.</returns>
 	public static List<List<string>> LoadFromString(string data)
 	{
-		return Parse(ref data);
+		return Parse(data);
 	}
 
-	static List<List<string>> Parse(ref string data)
+	static List<List<string>> Parse(string data)
 	{
 		var sheet = new List<List<string>>();
 		var row = new List<string>();
@@ -66,7 +66,7 @@ public static class CSVParser
 
 						if (character == ',')
 						{
-							AddCell(ref row, ref cell);
+							AddCell(row, cell);
 						}
 					}
 					else
@@ -97,12 +97,12 @@ public static class CSVParser
 				// Outside the quotation marks.
 				if (character == ',')
 				{
-					AddCell(ref row, ref cell);
+					AddCell(row, cell);
 				}
 				else if (character == '\n')
 				{
-					AddCell(ref row, ref cell);
-					AddRow(ref sheet, ref row);
+					AddCell(row, cell);
+					AddRow(sheet, ref row);
 				}
 				else if (character == '"')
 				{
@@ -119,20 +119,20 @@ public static class CSVParser
 		// Add last line except blank line
 		if (row.Count != 0 || cell.Length != 0)
 		{
-			AddCell(ref row, ref cell);
-			AddRow(ref sheet, ref row);
+			AddCell(row, cell);
+			AddRow(sheet, ref row);
 		}
 
 		return sheet;
 	}
 
-	static void AddCell(ref List<string> row, ref StringBuilder cell)
+	static void AddCell(List<string> row, StringBuilder cell)
 	{
 		row.Add(cell.ToString());
 		cell.Length = 0; // Old C#.
 	}
 
-	static void AddRow(ref List<List<string>> sheet, ref List<string> row)
+	static void AddRow(List<List<string>> sheet, ref List<string> row)
 	{
 		sheet.Add(row);
 		row = new List<string>();
