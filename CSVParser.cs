@@ -2,7 +2,7 @@
  * Simple CSV Parser for C# without any dependency. 
  *
  * These codes are licensed under CC0.
- * https://gist.github.com/yutokun/9370c5ef85601c21259cb38ea1500246
+ * https://github.com/yutokun/CSV-Parser
  */
 
 using System.Collections.Generic;
