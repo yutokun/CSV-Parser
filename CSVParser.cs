@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 public static class CSVParser
 {
@@ -44,6 +45,8 @@ public static class CSVParser
 		var readyToEndQuote = false;
 
 		// TODO : コードパスがひじょーにアレなので見やすく改良
+
+		ConvertToCrlf(ref data);
 
 		foreach (var character in data)
 		{
@@ -136,5 +139,10 @@ public static class CSVParser
 	{
 		sheet.Add(row);
 		row = new List<string>();
+	}
+
+	static void ConvertToCrlf(ref string data)
+	{
+		data = Regex.Replace(data, @"\r\n|\r|\n", "\r\n");
 	}
 }
