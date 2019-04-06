@@ -56,4 +56,4 @@ Compliant with [RFC 4180](http://www.ietf.org/rfc/rfc4180.txt).
 
 ## License
 
-[CC0](https://creativecommons.org/publicdomain/zero/1.0/)
+[CC0](https://creativecommons.org/publicdomain/zero/1.0/) or [Public Domain](LICENSE)
