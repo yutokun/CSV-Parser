@@ -12,30 +12,40 @@ using System.Text.RegularExpressions;
 
 public static class CSVParser
 {
+	public enum Delimiter
+	{
+		Comma,
+		Tab
+	}
+
+	static readonly Dictionary<Delimiter, char> Delimiters = new Dictionary<Delimiter, char>() {{Delimiter.Comma, ','}, {Delimiter.Tab, '\t'}};
+
 	/// <summary>
 	/// Load CSV data from specified path.
 	/// </summary>
 	/// <param name="path">CSV file path.</param>
+	/// <param name="delimiter">Delimiter.</param>
 	/// <param name="encoding">Type of text encoding. (default UTF-8)</param>
 	/// <returns>Nested list that CSV parsed.</returns>
-	public static List<List<string>> LoadFromPath(string path, Encoding encoding = null)
+	public static List<List<string>> LoadFromPath(string path, Delimiter delimiter = Delimiter.Comma, Encoding encoding = null)
 	{
 		encoding = encoding ?? Encoding.UTF8;
 		var data = File.ReadAllText(path, encoding);
-		return Parse(data);
+		return Parse(data, delimiter);
 	}
 
 	/// <summary>
 	/// Load CSV data from string.
 	/// </summary>
 	/// <param name="data">CSV string</param>
+	/// <param name="delimiter">Delimiter.</param>
 	/// <returns>Nested list that CSV parsed.</returns>
-	public static List<List<string>> LoadFromString(string data)
+	public static List<List<string>> LoadFromString(string data, Delimiter delimiter = Delimiter.Comma)
 	{
-		return Parse(data);
+		return Parse(data, delimiter);
 	}
 
-	static List<List<string>> Parse(string data)
+	static List<List<string>> Parse(string data, Delimiter delimiter)
 	{
 		var sheet = new List<List<string>>();
 		var row = new List<string>();
@@ -43,6 +53,7 @@ public static class CSVParser
 		var afterQuote = false;
 		var insideQuote = false;
 		var readyToEndQuote = false;
+		var delimiterChar = Delimiters[delimiter];
 
 		// TODO : コードパスがひじょーにアレなので見やすく改良
 
@@ -67,7 +78,7 @@ public static class CSVParser
 						afterQuote = false;
 						insideQuote = false;
 
-						if (character == ',')
+						if (character == delimiterChar)
 						{
 							AddCell(row, cell);
 						}
@@ -98,7 +109,7 @@ public static class CSVParser
 			else
 			{
 				// Outside the quotation marks.
-				if (character == ',')
+				if (character == delimiterChar)
 				{
 					AddCell(row, cell);
 				}

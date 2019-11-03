@@ -2,7 +2,7 @@
 
 CSV Parser without any dependency.  
 It uses CC0 License.
-  
+
 Best for: 
 
 - [Unity](https://unity3d.com/) projects requires cross-platform CSV parser. (maybe works on any platform supported by Unity)
@@ -53,6 +53,10 @@ Compliant with [RFC 4180](http://www.ietf.org/rfc/rfc4180.txt).
 - Correctly parse new lines, commas, quotation marks inside cell.
 - Escaped double quotes.
 - Some encoding types. (default UTF-8)
+
+## Beta
+
+Tab delimiter support is in beta.
 
 ## License
 
