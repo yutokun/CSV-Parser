@@ -51,7 +51,7 @@ public static class CSVParser
 		var row = new List<string>();
 		var cell = new StringBuilder();
 		var afterQuote = false;
-		var insideQuote = false;
+		var insideQuoteCell = false;
 		var readyToEndQuote = false;
 		var delimiterChar = Delimiters[delimiter];
 
@@ -62,7 +62,7 @@ public static class CSVParser
 		foreach (var character in data)
 		{
 			// Inside the quotation marks.
-			if (insideQuote)
+			if (insideQuoteCell)
 			{
 				if (afterQuote)
 				{
@@ -76,7 +76,7 @@ public static class CSVParser
 					{
 						// Non-consecutive quotes : End of the quotation.
 						afterQuote = false;
-						insideQuote = false;
+						insideQuoteCell = false;
 
 						if (character == delimiterChar)
 						{
@@ -121,7 +121,7 @@ public static class CSVParser
 				else if (character == '"')
 				{
 					afterQuote = true;
-					insideQuote = true;
+					insideQuoteCell = true;
 				}
 				else
 				{
