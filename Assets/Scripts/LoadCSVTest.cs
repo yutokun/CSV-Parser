@@ -10,7 +10,7 @@ public class LoadCSVTest : MonoBehaviour
 
 	void Load()
 	{
-		var sheet = CSVParser.LoadFromString(textAsset.text);
+		var sheet = CSVParser.LoadFromString(textAsset.text, delimiter);
 
 		var log = "";
 		foreach (var row in sheet)
