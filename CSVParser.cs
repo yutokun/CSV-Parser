@@ -120,7 +120,6 @@ public static class CSVParser
 				}
 				else if (character == '"')
 				{
-					afterQuote = true;
 					insideQuoteCell = true;
 				}
 				else
