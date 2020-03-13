@@ -8,6 +8,10 @@ Best for:
 - [Unity](https://unity3d.com/) projects requires cross-platform CSV parser. (maybe works on any platform supported by Unity)
 - Commercial products that you could not display the license.
 
+## Download
+
+[**Releases**](https://github.com/yutokun/CSV-Parser/releases)
+
 ## Usage
 
 ### Methods
