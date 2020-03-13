@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoadCSVTest : MonoBehaviour
+public class SheetLoadingExample : MonoBehaviour
 {
 	[SerializeField] Text uiText;
 	[SerializeField] TextAsset textAsset;
