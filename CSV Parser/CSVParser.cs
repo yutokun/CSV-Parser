@@ -14,7 +14,7 @@ namespace yutokun
 {
     public static class CSVParser
     {
-        static readonly Dictionary<Delimiter, char> Delimiters = new Dictionary<Delimiter, char>() { { Delimiter.Comma, ',' }, { Delimiter.Tab, '\t' } };
+        static readonly Dictionary<Delimiter, char> Delimiters = new Dictionary<Delimiter, char> { { Delimiter.Comma, ',' }, { Delimiter.Tab, '\t' } };
 
         /// <summary>
         /// Load CSV data from specified path.
