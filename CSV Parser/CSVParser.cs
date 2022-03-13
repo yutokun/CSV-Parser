@@ -48,8 +48,6 @@ namespace yutokun
             var insideQuoteCell = false;
             var readyToEndQuote = false;
 
-            // TODO : コードパスがひじょーにアレなので見やすく改良
-
             ConvertToCrlf(ref data);
 
             foreach (var character in data)
