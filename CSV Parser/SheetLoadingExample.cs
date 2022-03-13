@@ -1,20 +1,23 @@
-﻿public class SheetLoadingExample
+﻿namespace yutokun
 {
-    void Load()
+    public class SheetLoadingExample
     {
-        var sheet = CSVParser.LoadFromString("textAsset.text", CSVParser.Delimiter.Tab);
-
-        var log = "";
-        foreach (var row in sheet)
+        void Load()
         {
-            log += "|";
+            var sheet = CSVParser.LoadFromString("textAsset.text", Delimiter.Tab);
 
-            foreach (var cell in row)
+            var log = "";
+            foreach (var row in sheet)
             {
-                log += cell + "|";
-            }
+                log += "|";
 
-            log += "\n";
+                foreach (var cell in row)
+                {
+                    log += cell + "|";
+                }
+
+                log += "\n";
+            }
         }
     }
 }
