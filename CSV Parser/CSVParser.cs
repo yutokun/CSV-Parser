@@ -14,8 +14,6 @@ namespace yutokun
 {
     public static class CSVParser
     {
-        static readonly Dictionary<Delimiter, char> Delimiters = new Dictionary<Delimiter, char> { { Delimiter.Comma, ',' }, { Delimiter.Tab, '\t' } };
-
         /// <summary>
         /// Load CSV data from specified path.
         /// </summary>
@@ -49,7 +47,6 @@ namespace yutokun
             var afterQuote = false;
             var insideQuoteCell = false;
             var readyToEndQuote = false;
-            var delimiterChar = Delimiters[delimiter];
 
             // TODO : コードパスがひじょーにアレなので見やすく改良
 
@@ -74,7 +71,7 @@ namespace yutokun
                             afterQuote = false;
                             insideQuoteCell = false;
 
-                            if (character == delimiterChar)
+                            if (character == delimiter.ToChar())
                             {
                                 AddCell(row, cell);
                             }
@@ -105,7 +102,7 @@ namespace yutokun
                 else
                 {
                     // Outside the quotation marks.
-                    if (character == delimiterChar)
+                    if (character == delimiter.ToChar())
                     {
                         AddCell(row, cell);
                     }
