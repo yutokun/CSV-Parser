@@ -23,7 +23,7 @@ namespace yutokun
         /// <returns>Nested list that CSV parsed.</returns>
         public static List<List<string>> LoadFromPath(string path, Delimiter delimiter = Delimiter.Comma, Encoding encoding = null)
         {
-            encoding = encoding ?? Encoding.UTF8;        // TODO argument option
+            encoding = encoding ?? Encoding.UTF8;
             var data = File.ReadAllText(path, encoding); // TODO async
             return Parse(data, delimiter);
         }
