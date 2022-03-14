@@ -1,0 +1,18 @@
+name: Test
+
+on: push
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      - run: |
+          dotnet build 
+          cd ".\Tests\bin\debug\net472\"
+          dotnet test Tests.dll
