@@ -23,8 +23,8 @@ namespace yutokun
         /// <returns>Nested list that CSV parsed.</returns>
         public static List<List<string>> LoadFromPath(string path, Delimiter delimiter = Delimiter.Comma, Encoding encoding = null)
         {
-            encoding = encoding ?? Encoding.UTF8;
-            var data = File.ReadAllText(path, encoding);
+            encoding = encoding ?? Encoding.UTF8;        // TODO argument option
+            var data = File.ReadAllText(path, encoding); // TODO async
             return Parse(data, delimiter);
         }
 
@@ -47,6 +47,7 @@ namespace yutokun
             var afterQuote = false;
             var insideQuoteCell = false;
             var readyToEndQuote = false;
+            var insideCrlf = false;
 
             ConvertToCrlf(ref data);
 
@@ -100,14 +101,20 @@ namespace yutokun
                 else
                 {
                     // Outside the quotation marks.
-                    if (character == delimiter.ToChar())
+                    if (insideCrlf)
+                    {
+                        // Skipping \n at the end of line
+                        insideCrlf = false;
+                    }
+                    else if (character == delimiter.ToChar())
                     {
                         AddCell(row, cell);
                     }
-                    else if (character == '\n')
+                    else if (character == '\r')
                     {
                         AddCell(row, cell);
                         AddRow(sheet, ref row);
+                        insideCrlf = true;
                     }
                     else if (character == '"')
                     {
