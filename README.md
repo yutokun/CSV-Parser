@@ -1,5 +1,7 @@
 # CSV Parser for C#
 
+[![Test](https://github.com/yutokun/CSV-Parser/actions/workflows/test.yml/badge.svg)](https://github.com/yutokun/CSV-Parser/actions/workflows/test.yml)
+
 CSV Parser without any dependency.  
 It uses CC0 License.
 
