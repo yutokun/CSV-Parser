@@ -3,8 +3,6 @@ bin/
 .vs/
 .vscode/
 .idea/
-*.csproj
-*.sln
 *.DotSettings
 *.user
 
