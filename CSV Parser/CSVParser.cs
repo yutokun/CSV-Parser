@@ -41,94 +41,62 @@ namespace yutokun
 
         static List<List<string>> Parse(string data, Delimiter delimiter)
         {
+            ConvertToCrlf(ref data);
+
             var sheet = new List<List<string>>();
             var row = new List<string>();
             var cell = new StringBuilder();
-            var afterQuote = false;
             var insideQuoteCell = false;
-            var readyToEndQuote = false;
-            var insideCrlf = false;
 
-            ConvertToCrlf(ref data);
+            // TODO Span<> で速くならないか
 
-            foreach (var character in data)
+            while (data.Length > 0)
             {
-                // Inside the quotation marks.
-                if (insideQuoteCell)
+                if (data.StartsWith(delimiter.ToChar().ToString()))
                 {
-                    if (afterQuote)
+                    if (insideQuoteCell)
                     {
-                        if (character == '"')
-                        {
-                            // Consecutive quotes : A quotation mark.
-                            cell.Append("\"");
-                            afterQuote = false;
-                        }
-                        else if (readyToEndQuote && character != '"')
-                        {
-                            // Non-consecutive quotes : End of the quotation.
-                            afterQuote = false;
-                            insideQuoteCell = false;
-
-                            if (character == delimiter.ToChar())
-                            {
-                                AddCell(row, cell);
-                            }
-                        }
-                        else
-                        {
-                            cell.Append(character);
-                            afterQuote = false;
-                        }
-
-                        readyToEndQuote = false;
+                        cell.Append(delimiter.ToChar());
                     }
                     else
                     {
-                        if (character == '"')
-                        {
-                            // A quot mark inside the quotation.
-                            // Determine by the next character.
-                            afterQuote = true;
-                            readyToEndQuote = true;
-                        }
-                        else
-                        {
-                            cell.Append(character);
-                        }
-                    }
-                }
-                else
-                {
-                    // Outside the quotation marks.
-                    if (insideCrlf)
-                    {
-                        // Skipping \n at the end of line
-                        insideCrlf = false;
-                    }
-                    else if (character == delimiter.ToChar())
-                    {
                         AddCell(row, cell);
                     }
-                    else if (character == '\r')
+
+                    data = data.Remove(0, 1);
+                }
+                else if (data.StartsWith("\r\n"))
+                {
+                    if (insideQuoteCell)
+                    {
+                        cell.Append("\r\n");
+                    }
+                    else
                     {
                         AddCell(row, cell);
                         AddRow(sheet, ref row);
-                        insideCrlf = true;
                     }
-                    else if (character == '"')
-                    {
-                        insideQuoteCell = true;
-                    }
-                    else
-                    {
-                        cell.Append(character);
-                    }
+
+                    data = data.Remove(0, 2);
+                }
+                else if (data.StartsWith("\"\""))
+                {
+                    cell.Append("\"");
+                    data = data.Remove(0, 2);
+                }
+                else if (data.StartsWith("\""))
+                {
+                    insideQuoteCell = !insideQuoteCell;
+                    data = data.Remove(0, 1);
+                }
+                else
+                {
+                    cell.Append(data[0]);
+                    data = data.Remove(0, 1);
                 }
             }
 
-            // Add last line except blank line
-            if (row.Count != 0 || cell.Length != 0)
+            if (row.Count > 0)
             {
                 AddCell(row, cell);
                 AddRow(sheet, ref row);
