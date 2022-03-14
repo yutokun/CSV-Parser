@@ -1,9 +1,18 @@
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace yutokun.Tests
 {
     public class Tests
     {
+        [Test]
+        public async Task AsyncLoad()
+        {
+            var sync = CSVParser.LoadFromPath("../../../TesterSheets/CSV/level3.csv");
+            var async = await CSVParser.LoadFromPathAsync("../../../TesterSheets/CSV/level3.csv");
+            Assert.That(sync, Is.EqualTo(async));
+        }
+
         [Test]
         public void RFC4180_1()
         {

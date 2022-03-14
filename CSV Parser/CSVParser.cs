@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace yutokun
 {
@@ -29,23 +30,50 @@ namespace yutokun
 
             if (delimiter == Delimiter.Auto)
             {
-                var extension = Path.GetExtension(path);
-                if (extension.Equals(".csv", StringComparison.OrdinalIgnoreCase))
-                {
-                    delimiter = Delimiter.Comma;
-                }
-                else if (extension.Equals(".tsv", StringComparison.OrdinalIgnoreCase))
-                {
-                    delimiter = Delimiter.Tab;
-                }
-                else
-                {
-                    throw new Exception($"Delimiter estimation failed. Unknown Extension: {extension}");
-                }
+                delimiter = EstimateDelimiter(path);
             }
 
-            var data = File.ReadAllText(path, encoding); // TODO async
+            var data = File.ReadAllText(path, encoding);
             return Parse(data, delimiter);
+        }
+
+        /// <summary>
+        /// Load CSV data asynchronously from specified path.
+        /// </summary>
+        /// <param name="path">CSV file path.</param>
+        /// <param name="delimiter">Delimiter.</param>
+        /// <param name="encoding">Type of text encoding. (default UTF-8)</param>
+        /// <returns>Nested list that CSV parsed.</returns>
+        public static async Task<List<List<string>>> LoadFromPathAsync(string path, Delimiter delimiter = Delimiter.Auto, Encoding encoding = null)
+        {
+            encoding = encoding ?? Encoding.UTF8;
+
+            if (delimiter == Delimiter.Auto)
+            {
+                delimiter = EstimateDelimiter(path);
+            }
+
+            using (var reader = new StreamReader(path, encoding))
+            {
+                var data = await reader.ReadToEndAsync();
+                return Parse(data, delimiter);
+            }
+        }
+
+        static Delimiter EstimateDelimiter(string path)
+        {
+            var extension = Path.GetExtension(path);
+            if (extension.Equals(".csv", StringComparison.OrdinalIgnoreCase))
+            {
+                return Delimiter.Comma;
+            }
+
+            if (extension.Equals(".tsv", StringComparison.OrdinalIgnoreCase))
+            {
+                return Delimiter.Tab;
+            }
+
+            throw new Exception($"Delimiter estimation failed. Unknown Extension: {extension}");
         }
 
         /// <summary>
