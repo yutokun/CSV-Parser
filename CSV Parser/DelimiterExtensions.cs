@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace yutokun
 {
@@ -9,6 +10,8 @@ namespace yutokun
             // C# 7.3: Unity 2018.2 - 2020.1 Compatible
             switch (delimiter)
             {
+                case Delimiter.Auto:
+                    throw new InvalidEnumArgumentException("Could not return char of Delimiter.Auto.");
                 case Delimiter.Comma:
                     return ',';
                 case Delimiter.Tab:

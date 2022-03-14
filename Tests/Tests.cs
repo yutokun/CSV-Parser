@@ -158,7 +158,7 @@ namespace yutokun.Tests
         [Test]
         public void TSVLevel1()
         {
-            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/level1.tsv", Delimiter.Tab);
+            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/level1.tsv");
             Assert.That(sheet[0], Is.EquivalentTo(new[] { "first", "second" }));
             Assert.That(sheet[1], Is.EquivalentTo(new[] { "third", "fourth" }));
             Assert.That(sheet[2], Is.EquivalentTo(new[] { "fifth", "sixth" }));
@@ -169,7 +169,7 @@ namespace yutokun.Tests
         [Test]
         public void TSVLevel2()
         {
-            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/level2.tsv", Delimiter.Tab);
+            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/level2.tsv");
             Assert.That(sheet[0], Is.EquivalentTo(new[] { "fir\r\nst", "sec,on\"\"d" }));
             Assert.That(sheet[1], Is.EquivalentTo(new[] { "th\",\"\",,ird", "fourth" }));
             Assert.That(sheet[2], Is.EquivalentTo(new[] { "fifth", "sixth" }));
@@ -179,7 +179,7 @@ namespace yutokun.Tests
         [Test]
         public void TSVLevel3()
         {
-            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/level3.tsv", Delimiter.Tab);
+            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/level3.tsv");
             Assert.That(sheet[0], Is.EquivalentTo(new[] { "名前", "容量", "備考" }));
             Assert.That(sheet[1], Is.EquivalentTo(new[] { "カフェラテ", "300", "甘い" }));
             Assert.That(sheet[2], Is.EquivalentTo(new[] { "カフェオレ", "250", "某コンビニで購入\r\n\r\nかなり甘い" }));
@@ -190,7 +190,7 @@ namespace yutokun.Tests
         [Test]
         public void TSVCR()
         {
-            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/CR.tsv", Delimiter.Tab);
+            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/CR.tsv");
             Assert.That(sheet[0], Is.EquivalentTo(new[] { "名前", "容量", "備考" }));
             Assert.That(sheet[1], Is.EquivalentTo(new[] { "カフェラテ", "300", "甘い" }));
             Assert.That(sheet[2], Is.EquivalentTo(new[] { "カフェオレ", "250", "某コンビニで購入\r\n\r\nかなり甘い" }));
@@ -201,7 +201,7 @@ namespace yutokun.Tests
         [Test]
         public void TSVLF()
         {
-            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/LF.tsv", Delimiter.Tab);
+            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/LF.tsv");
             Assert.That(sheet[0], Is.EquivalentTo(new[] { "名前", "容量", "備考" }));
             Assert.That(sheet[1], Is.EquivalentTo(new[] { "カフェラテ", "300", "甘い" }));
             Assert.That(sheet[2], Is.EquivalentTo(new[] { "カフェオレ", "250", "某コンビニで購入\r\n\r\nかなり甘い" }));
@@ -212,7 +212,7 @@ namespace yutokun.Tests
         [Test]
         public void TSVDemoData()
         {
-            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/demodata.tsv", Delimiter.Tab);
+            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/demodata.tsv");
             Assert.That(sheet[0], Is.EquivalentTo(new[] { "clientid", "date", "weekdays", "gains", "prices", "up" }));
             Assert.That(sheet[1], Is.EquivalentTo(new[] { "0", "2008-04-30", "Wed", "-0.52458192906686452", "7791404.0091921333", "False" }));
             Assert.That(sheet[2], Is.EquivalentTo(new[] { "1", "2008-05-01", "Thu", "0.076191536201738269", "3167180.7366340165", "True" }));
@@ -230,7 +230,7 @@ namespace yutokun.Tests
         [Test]
         public void TSVFromStyrbo()
         {
-            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/from-styrbo-issue-807169382.tsv", Delimiter.Tab);
+            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/from-styrbo-issue-807169382.tsv");
             Assert.That(sheet[0], Is.EquivalentTo(new[] { "name1", "names:1,2,3" }));
             Assert.That(sheet[1], Is.EquivalentTo(new[] { "name2", "names:4,5,6" }));
             Assert.That(sheet.Count, Is.EqualTo(2));

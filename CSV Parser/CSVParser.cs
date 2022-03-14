@@ -5,7 +5,9 @@
  * https://github.com/yutokun/CSV-Parser
  */
 
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -21,9 +23,27 @@ namespace yutokun
         /// <param name="delimiter">Delimiter.</param>
         /// <param name="encoding">Type of text encoding. (default UTF-8)</param>
         /// <returns>Nested list that CSV parsed.</returns>
-        public static List<List<string>> LoadFromPath(string path, Delimiter delimiter = Delimiter.Comma, Encoding encoding = null)
+        public static List<List<string>> LoadFromPath(string path, Delimiter delimiter = Delimiter.Auto, Encoding encoding = null)
         {
             encoding = encoding ?? Encoding.UTF8;
+
+            if (delimiter == Delimiter.Auto)
+            {
+                var extension = Path.GetExtension(path);
+                if (extension.Equals(".csv", StringComparison.OrdinalIgnoreCase))
+                {
+                    delimiter = Delimiter.Comma;
+                }
+                else if (extension.Equals(".tsv", StringComparison.OrdinalIgnoreCase))
+                {
+                    delimiter = Delimiter.Tab;
+                }
+                else
+                {
+                    throw new Exception($"Delimiter estimation failed. Unknown Extension: {extension}");
+                }
+            }
+
             var data = File.ReadAllText(path, encoding); // TODO async
             return Parse(data, delimiter);
         }
@@ -36,6 +56,7 @@ namespace yutokun
         /// <returns>Nested list that CSV parsed.</returns>
         public static List<List<string>> LoadFromString(string data, Delimiter delimiter = Delimiter.Comma)
         {
+            if (delimiter == Delimiter.Auto) throw new InvalidEnumArgumentException("Delimiter estimation from string is not supported.");
             return Parse(data, delimiter);
         }
 
