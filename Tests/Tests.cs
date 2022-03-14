@@ -139,6 +139,15 @@ namespace yutokun.Tests
         }
 
         [Test]
+        public void CSVFromStyrbo()
+        {
+            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/CSV/from-styrbo-issue-807169382.csv");
+            Assert.That(sheet[0], Is.EquivalentTo(new[] { "name1", "names:1,2,3" }));
+            Assert.That(sheet[1], Is.EquivalentTo(new[] { "name2", "names:4,5,6" }));
+            Assert.That(sheet.Count, Is.EqualTo(2));
+        }
+
+        [Test]
         public void FromWikipedia()
         {
             var sheet = CSVParser.LoadFromPath("../../../TesterSheets/From Wikipedia/From Wikipedia.csv");
@@ -216,6 +225,15 @@ namespace yutokun.Tests
             Assert.That(sheet[9], Is.EquivalentTo(new[] { "8", "2008-05-08", "Thu", "-1.1841008656818983", "1920959.5423492221", "False" }));
             Assert.That(sheet[10], Is.EquivalentTo(new[] { "9", "2008-05-09", "Fri", "-1.5803692595811152", "8456240.6198725495", "False" }));
             Assert.That(sheet.Count, Is.EqualTo(11));
+        }
+
+        [Test]
+        public void TSVFromStyrbo()
+        {
+            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/from-styrbo-issue-807169382.tsv", Delimiter.Tab);
+            Assert.That(sheet[0], Is.EquivalentTo(new[] { "name1", "names:1,2,3" }));
+            Assert.That(sheet[1], Is.EquivalentTo(new[] { "name2", "names:4,5,6" }));
+            Assert.That(sheet.Count, Is.EqualTo(2));
         }
     }
 }
