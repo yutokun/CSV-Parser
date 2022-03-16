@@ -256,7 +256,7 @@ namespace yutokun.Tests
             stopwatch.Stop();
             var ms = (double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000;
             Console.WriteLine($"took {ms.ToString()}ms");
-            Assert.That(ms, Is.LessThan(10));
+            Assert.That(ms, Is.LessThan(500));
         }
     }
 }
