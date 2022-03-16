@@ -96,12 +96,19 @@ namespace yutokun
             var row = new List<string>();
             var cell = new StringBuilder();
             var insideQuoteCell = false;
+            var start = 0;
 
-            // TODO Span<> で速くならないか
+            var delimiterSpan = delimiter.ToChar().ToString().AsSpan();
+            var crlfSpan = "\r\n".AsSpan();
+            var oneDoubleQuotSpan = "\"".AsSpan();
+            var twoDoubleQuotSpan = "\"\"".AsSpan();
 
-            while (data.Length > 0)
+            while (start < data.Length)
             {
-                if (data.StartsWith(delimiter.ToChar().ToString()))
+                var length = start <= data.Length - 2 ? 2 : 1;
+                var span = data.AsSpan(start, length);
+
+                if (span.StartsWith(delimiterSpan))
                 {
                     if (insideQuoteCell)
                     {
@@ -112,9 +119,9 @@ namespace yutokun
                         AddCell(row, cell);
                     }
 
-                    data = data.Remove(0, 1);
+                    start += 1;
                 }
-                else if (data.StartsWith("\r\n"))
+                else if (span.StartsWith(crlfSpan))
                 {
                     if (insideQuoteCell)
                     {
@@ -126,22 +133,22 @@ namespace yutokun
                         AddRow(sheet, ref row);
                     }
 
-                    data = data.Remove(0, 2);
+                    start += 2;
                 }
-                else if (data.StartsWith("\"\""))
+                else if (span.StartsWith(twoDoubleQuotSpan))
                 {
                     cell.Append("\"");
-                    data = data.Remove(0, 2);
+                    start += 2;
                 }
-                else if (data.StartsWith("\""))
+                else if (span.StartsWith(oneDoubleQuotSpan))
                 {
                     insideQuoteCell = !insideQuoteCell;
-                    data = data.Remove(0, 1);
+                    start += 1;
                 }
                 else
                 {
-                    cell.Append(data[0]);
-                    data = data.Remove(0, 1);
+                    cell.Append(span[0]);
+                    start += 1;
                 }
             }
 
