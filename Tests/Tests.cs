@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
@@ -243,6 +245,18 @@ namespace yutokun.Tests
             Assert.That(sheet[0], Is.EquivalentTo(new[] { "name1", "names:1,2,3" }));
             Assert.That(sheet[1], Is.EquivalentTo(new[] { "name2", "names:4,5,6" }));
             Assert.That(sheet.Count, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void TSVHeadset()
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            CSVParser.LoadFromPath("../../../TesterSheets/TSV/headset.tsv");
+            stopwatch.Stop();
+            var ms = (double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000;
+            Console.WriteLine($"took {ms.ToString()}ms");
+            Assert.That(ms, Is.LessThan(10));
         }
     }
 }
