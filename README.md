@@ -9,6 +9,15 @@ Best for:
 - [Unity](https://unity3d.com/) projects requires cross-platform CSV parser. (maybe works on any platform supported by Unity)
 - Commercial products that you could not display the license.
 
+## Prerequisites
+
+| Environment             | Prerequisites                                                             |
+| ----------------------- | ------------------------------------------------------------------------- |
+| Unity 2021.2 or later   | None                                                                      |
+| Unity 2019.1 - 2021.1   | Some DLLs in your project                                                 |
+| Unity 2018.4 or earlier | .NET 4.x Equivalent                                                       |
+| .NET Project            | [System.Memory](https://www.nuget.org/packages/System.Memory/) from NuGet |
+
 ## Download
 
 [**Releases**](https://github.com/yutokun/CSV-Parser/releases)
@@ -34,21 +43,22 @@ CSVParser.LoadFromPath(string path, Encoding encoding = null)
 ```c#
 var sheet = CSVParser.LoadFromString(csvString);
 
-var log = "";
+var styled = new StringBuilder();
 foreach (var row in sheet)
 {
-    log += "|";
+    styled.Append("| );
 
     foreach (var cell in row)
     {
-        log += cell + "|";
+        styled.Append(cell);
+        styled.Append(" | ");
     }
 
-    log += "\n";
+    styled.AppendLine();
 }
 
-Debug.Log(log);         // Unity
-Console.WriteLine(log); // C# 
+Debug.Log(styled.ToString());         // Unity
+Console.WriteLine(styled.ToString()); // C# 
 ```
 
 ## Specs
