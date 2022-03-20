@@ -12,11 +12,37 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-       
+
     - name: Load Release Informations
       run: |
-        echo "::set-env name=FILENAME::Assets/Scripts/CSVParser.cs"
-        echo "::set-env name=TITLE::`cat github-releases/title.txt`"
+        title=`cat github-releases/title.txt`
+        echo "TITLE=${title}" >> $GITHUB_ENV
+
+    - name: Install Zip
+      uses: montudor/action-zip@v1
+
+    - name: Zip .NET Release
+      run: zip -qq -r "CSV Parser-dotnet.zip" .
+      working-directory: "CSV Parser/src/"
+
+    - name: Listing files for .unitypackage
+      run: |
+        find "Unity Examples/CSV Parser Example 2018.4/Assets/" -name \*.meta > metaListOld
+        find "Unity Examples/CSV Parser Example 2021.2/Assets/" -name \*.meta > metaListNew
+
+    - name: Create .unitypackage for old Unity
+      uses: pCYSl5EDgo/create-unitypackage@v1
+      with:
+       # Output unitypackage file path
+       package-path: "CSVParser-Unity2021.1OrOlder.unitypackage"
+       include-files: metaListOld
+
+    - name: Create .unitypackage for new Unity
+      uses: pCYSl5EDgo/create-unitypackage@v1
+      with:
+       # Output unitypackage file path
+       package-path: "CSVParser-Unity2021.2OrNewer.unitypackage"
+       include-files: metaListNew
 
     - name: Create a GitHub Release
       uses: softprops/action-gh-release@v0.1.5
@@ -32,6 +58,9 @@ jobs:
         # Identify the release as a prerelease. Defaults to false
         prerelease: false
         # Newline-delimited list of path globs for asset files to upload
-        files: ${{ env.FILENAME }}
+        files: |
+          CSV Parser/src/CSV Parser-dotnet.zip
+          CSVParser-Unity2021.1OrOlder.unitypackage
+          CSVParser-Unity2021.2OrNewer.unitypackage
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
