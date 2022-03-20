@@ -22,29 +22,34 @@ jobs:
       uses: montudor/action-zip@v1
 
     - name: Zip .NET Release
-      run: zip -qq -r "CSV Parser-dotnet.zip" .
+      run: zip -qq -r "CSVParser-dotnet.zip" .
       working-directory: "CSV Parser/src/"
 
     - name: Listing files for .unitypackage
       run: |
-        echo "Unity Examples/CSV Parser Example 2018.4/Assets/CSVParser.meta" > metaListOld
-        find "Unity Examples/CSV Parser Example 2018.4/Assets/CSVParser/" -name \*.meta > metaListOld
-        echo "Unity Examples/CSV Parser Example 2021.2/Assets/CSVParser.meta" > metaListNew
-        find "Unity Examples/CSV Parser Example 2021.2/Assets/CSVParser/" -name \*.meta > metaListNew
+        cd "Unity Examples/CSV Parser Example 2018.4/"
+        echo "Assets/CSVParser.meta" > metaListOld
+        find "Assets/CSVParser/" -name \*.meta > metaListOld
+        cd "../../Unity Examples/CSV Parser Example 2021.2/"
+        echo "Assets/CSVParser.meta" > metaListNew
+        find "Assets/CSVParser/" -name \*.meta > metaListNew
+        cd /
 
     - name: Create .unitypackage for old Unity
       uses: pCYSl5EDgo/create-unitypackage@v1
       with:
        # Output unitypackage file path
-       package-path: "CSVParser-Unity2021.1OrOlder.unitypackage"
-       include-files: metaListOld
+       package-path: "Unity Examples/CSV Parser Example 2018.4/CSVParser-Unity2021.1OrOlder.unitypackage"
+       include-files: "Unity Examples/CSV Parser Example 2018.4/metaListOld"
+       project-folder: "Unity Examples/CSV Parser Example 2018.4/"
 
     - name: Create .unitypackage for new Unity
       uses: pCYSl5EDgo/create-unitypackage@v1
       with:
        # Output unitypackage file path
-       package-path: "CSVParser-Unity2021.2OrNewer.unitypackage"
-       include-files: metaListNew
+       package-path: "Unity Examples/CSV Parser Example 2021.2/CSVParser-Unity2021.2OrNewer.unitypackage"
+       include-files: "Unity Examples/CSV Parser Example 2021.2/metaListNew"
+       project-folder: "Unity Examples/CSV Parser Example 2021.2/"
 
     - name: Create a GitHub Release
       uses: softprops/action-gh-release@v0.1.5
@@ -61,8 +66,8 @@ jobs:
         prerelease: false
         # Newline-delimited list of path globs for asset files to upload
         files: |
-          CSV Parser/src/CSV Parser-dotnet.zip
-          CSVParser-Unity2021.1OrOlder.unitypackage
-          CSVParser-Unity2021.2OrNewer.unitypackage
+          CSV Parser/src/CSVParser-dotnet.zip
+          Unity Examples/CSV Parser Example 2018.4/CSVParser-Unity2021.1OrOlder.unitypackage
+          Unity Examples/CSV Parser Example 2021.2/CSVParser-Unity2021.2OrNewer.unitypackage
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
