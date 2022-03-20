@@ -72,6 +72,10 @@ Compliant with [RFC 4180](http://www.ietf.org/rfc/rfc4180.txt).
 
 Tab delimiter support is in beta.
 
+## Development
+
+The repository contains multiple types of newline code. Run `git config core.autocrlf false` in your local repository.
+
 ## License
 
 [CC0](https://creativecommons.org/publicdomain/zero/1.0/) or [Public Domain](LICENSE)
