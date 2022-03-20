@@ -27,8 +27,10 @@ jobs:
 
     - name: Listing files for .unitypackage
       run: |
-        find "Unity Examples/CSV Parser Example 2018.4/Assets/" -name \*.meta > metaListOld
-        find "Unity Examples/CSV Parser Example 2021.2/Assets/" -name \*.meta > metaListNew
+        echo "Unity Examples/CSV Parser Example 2018.4/Assets/CSVParser.meta" > metaListOld
+        find "Unity Examples/CSV Parser Example 2018.4/Assets/CSVParser/" -name \*.meta > metaListOld
+        echo "Unity Examples/CSV Parser Example 2021.2/Assets/CSVParser.meta" > metaListNew
+        find "Unity Examples/CSV Parser Example 2021.2/Assets/CSVParser/" -name \*.meta > metaListNew
 
     - name: Create .unitypackage for old Unity
       uses: pCYSl5EDgo/create-unitypackage@v1
