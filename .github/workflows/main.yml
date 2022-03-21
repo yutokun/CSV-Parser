@@ -13,11 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Load Release Informations
-      run: |
-        title=`cat github-releases/title.txt`
-        echo "TITLE=${title}" >> $GITHUB_ENV
-
     - name: Install Zip
       uses: montudor/action-zip@v1
 
@@ -59,7 +54,7 @@ jobs:
         # Path to load note-worthy description of changes in release from
         body_path: RELEASE.md
         # Gives the release a custom name. Defaults to tag name
-        name: ${{ env.TITLE }}
+        name: ${{ env.GIT_TAG_NAME }}
         # Creates a draft release. Defaults to false
         draft: false
         # Identify the release as a prerelease. Defaults to false
