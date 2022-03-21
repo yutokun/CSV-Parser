@@ -24,10 +24,11 @@ jobs:
       run: |
         cd "Unity Examples/CSV Parser Example 2018.4/"
         echo "Assets/CSVParser.meta" > metaListOld
-        find "Assets/CSVParser/" -name \*.meta > metaListOld
+        find "Assets/CSVParser/" -name \*.meta >> metaListOld
+        find "Assets/Plugins/" -name \*.meta >> metaListOld
         cd "../../Unity Examples/CSV Parser Example 2021.2/"
         echo "Assets/CSVParser.meta" > metaListNew
-        find "Assets/CSVParser/" -name \*.meta > metaListNew
+        find "Assets/CSVParser/" -name \*.meta >> metaListNew
         cd /
 
     - name: Create .unitypackage for old Unity
