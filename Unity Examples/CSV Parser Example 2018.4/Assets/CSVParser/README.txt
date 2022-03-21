@@ -1,0 +1,1 @@
+If you use Unity 2018.4 or earlier, you must choose [.NET 4.x Equivalent] on [Edit] -> [Project Settings] -> [Player] -> [Other Settings] -> [Configuration] -> [Scripting Runtime Version].
