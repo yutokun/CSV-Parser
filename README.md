@@ -6,7 +6,7 @@ CSV Parser with CC0 License.
 
 Best for: 
 
-- [Unity](https://unity3d.com/) projects requires cross-platform CSV parser. (maybe works on any platform supported by Unity)
+- [Unity](https://unity3d.com/) projects that requires cross-platform CSV parser. (maybe works on any platform supported by Unity)
 - Commercial products that you could not display the license.
 
 ## Prerequisites
@@ -70,7 +70,9 @@ Compliant with [RFC 4180](http://www.ietf.org/rfc/rfc4180.txt).
 
 ## Beta
 
-Tab delimiter support is in beta.
+- Tab delimiter support
+
+- Async loading
 
 ## Development
 
