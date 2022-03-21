@@ -167,6 +167,15 @@ namespace yutokun.Tests
         }
 
         [Test]
+        public void CSVFromExcel()
+        {
+            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/CSV/excel exported.csv");
+            Assert.That(sheet[0], Is.EquivalentTo(new[] { "header", "\"header,.", "\"header,\",\"\"," }));
+            Assert.That(sheet[1], Is.EquivalentTo(new[] { "abc\"", ",,,\"def", ",\"ghi,\"" }));
+            Assert.That(sheet.Count, Is.EqualTo(2));
+        }
+
+        [Test]
         public void TSVLevel1()
         {
             var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/level1.tsv");
