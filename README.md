@@ -80,4 +80,12 @@ The repository contains multiple types of newline code. Run `git config core.aut
 
 ## License
 
+### Unique part of the repository
+
 [CC0](https://creativecommons.org/publicdomain/zero/1.0/) or [Public Domain](LICENSE)
+
+### .NET Runtimes (included in the .unitypackage for old Unity)
+
+[The MIT License](https://github.com/dotnet/runtime/blob/main/LICENSE.TXT)
+
+Copyright (c) .NET Foundation and Contributors
