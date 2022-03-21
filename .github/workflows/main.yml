@@ -57,7 +57,7 @@ jobs:
         # Note-worthy description of changes in release
 #         body: # optional
         # Path to load note-worthy description of changes in release from
-        body_path: github-releases/body.md
+        body_path: RELEASE.md
         # Gives the release a custom name. Defaults to tag name
         name: ${{ env.TITLE }}
         # Creates a draft release. Defaults to false
