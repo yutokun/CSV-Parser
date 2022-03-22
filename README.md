@@ -19,7 +19,7 @@ Best for:
 
 ## Download
 
-[**Releases**](https://github.com/yutokun/CSV-Parser/releases)
+Download zip or unitypackage from [**Releases**](https://github.com/yutokun/CSV-Parser/releases).
 
 ## Usage
 
