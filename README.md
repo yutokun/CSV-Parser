@@ -45,7 +45,7 @@ var sheet = CSVParser.LoadFromString(csvString);
 var styled = new StringBuilder();
 foreach (var row in sheet)
 {
-    styled.Append("| );
+    styled.Append("| ");
 
     foreach (var cell in row)
     {
