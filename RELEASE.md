@@ -1,22 +1,3 @@
-Completely reworked new version.
+# Fix
 
-# New
-
-- Estimation of delimiters by extension.
-- Tests ensuring parsing results.
-- Continuous health checks by CI.
-- Unity examples in several versions.
-
-# Imporvements
-
-- More accurate parsing.
-
-- Migration to pure C# project.
-
-# Change
-
-- Now it depends on System.Memory.dll.
-
-# Beta
-
-- Asynchronous loading.
+- Fixed a bug that last cell will be ignored when single cell rows not ending with CRLF. (Thank you so much @gmichaudAniki !)
