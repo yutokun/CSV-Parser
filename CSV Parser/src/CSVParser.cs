@@ -152,7 +152,7 @@ namespace yutokun
                 }
             }
 
-            if (row.Count > 0)
+            if (row.Count > 0 || cell.Length > 0)
             {
                 AddCell(row, cell);
                 AddRow(sheet, ref row);

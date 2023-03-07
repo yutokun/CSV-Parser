@@ -176,6 +176,16 @@ namespace yutokun.Tests
         }
 
         [Test]
+        public void CSVSingleCellRowsNotEndingWithCRLF()
+        {
+            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/CSV/single-cell-rows-not-ending-with-CRLF.csv");
+            Assert.That(sheet[0], Is.EquivalentTo(new[] { "Action" }));
+            Assert.That(sheet[1], Is.EquivalentTo(new[] { "Adventure" }));
+            Assert.That(sheet[2], Is.EquivalentTo(new[] { "Thriller" }));
+            Assert.That(sheet.Count, Is.EqualTo(3));
+        }
+
+        [Test]
         public void TSVLevel1()
         {
             var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/level1.tsv");
@@ -266,6 +276,16 @@ namespace yutokun.Tests
             var ms = (double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000;
             Console.WriteLine($"took {ms.ToString()}ms");
             Assert.That(ms, Is.LessThan(500));
+        }
+
+        [Test]
+        public void TSVSingleCellRowsNotEndingWithCRLF()
+        {
+            var sheet = CSVParser.LoadFromPath("../../../TesterSheets/TSV/single-cell-rows-not-ending-with-CRLF.tsv");
+            Assert.That(sheet[0], Is.EquivalentTo(new[] { "Action" }));
+            Assert.That(sheet[1], Is.EquivalentTo(new[] { "Adventure" }));
+            Assert.That(sheet[2], Is.EquivalentTo(new[] { "Thriller" }));
+            Assert.That(sheet.Count, Is.EqualTo(3));
         }
     }
 }
