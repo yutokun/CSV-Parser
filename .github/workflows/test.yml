@@ -20,5 +20,4 @@ jobs:
       - run: |
           dotnet build 
           cd ".\Tests\bin\debug\net6.0\"
-          ls
           dotnet test Tests.dll
