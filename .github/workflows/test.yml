@@ -17,5 +17,11 @@ jobs:
 
       - run: |
           dotnet build 
+          cd ".\Tests\"
+          ls
+          cd ".\bin\"
+          ls
+          cd ".\debug\"
+          ls
           cd ".\Tests\bin\debug\net472\"
           dotnet test Tests.dll
