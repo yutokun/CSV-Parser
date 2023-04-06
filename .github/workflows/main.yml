@@ -22,7 +22,7 @@ jobs:
 
     - name: Listing files for .unitypackage
       run: |
-        cd "Unity Examples/CSV Parser Example 2018.4/"
+        cd "Unity Examples/CSV Parser Example 2019.1/"
         echo "Assets/CSVParser.meta" > metaListOld
         find "Assets/CSVParser/" -name \*.meta >> metaListOld
         find "Assets/Plugins/" -name \*.meta >> metaListOld
@@ -35,9 +35,9 @@ jobs:
       uses: pCYSl5EDgo/create-unitypackage@v1
       with:
        # Output unitypackage file path
-       package-path: "Unity Examples/CSV Parser Example 2018.4/CSVParser-Unity2021.1OrOlder.unitypackage"
-       include-files: "Unity Examples/CSV Parser Example 2018.4/metaListOld"
-       project-folder: "Unity Examples/CSV Parser Example 2018.4/"
+       package-path: "Unity Examples/CSV Parser Example 2019.1/CSVParser-Unity2021.1OrOlder.unitypackage"
+       include-files: "Unity Examples/CSV Parser Example 2019.1/metaListOld"
+       project-folder: "Unity Examples/CSV Parser Example 2019.1/"
 
     - name: Create .unitypackage for new Unity
       uses: pCYSl5EDgo/create-unitypackage@v1
@@ -63,7 +63,7 @@ jobs:
         # Newline-delimited list of path globs for asset files to upload
         files: |
           CSV Parser/src/CSVParser-dotnet.zip
-          Unity Examples/CSV Parser Example 2018.4/CSVParser-Unity2021.1OrOlder.unitypackage
+          Unity Examples/CSV Parser Example 2019.1/CSVParser-Unity2021.1OrOlder.unitypackage
           Unity Examples/CSV Parser Example 2021.2/CSVParser-Unity2021.2OrNewer.unitypackage
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
