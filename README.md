@@ -78,6 +78,17 @@ Compliant with [RFC 4180](http://www.ietf.org/rfc/rfc4180.txt).
 
 The repository contains multiple types of newline code. Run `git config core.autocrlf false` in your local repository.
 
+## Why this repo has multiple Unity Examples?
+
+One of the reasons is to check operation in different Unity versions. Another one is to build .unitypackage with CI.
+
+Unity changes a lot between their Tech Streams. It leads different requisites / dependency to the parser. Affected changes below.
+
+| Versions          | Difference                                     |
+| ----------------- | ---------------------------------------------- |
+| 2019.1 and 2019.2 | Has Scripting Runtime Version selector or not. |
+| 2021.1 and 2021.2 | Requires additional DLLs or not.               |
+
 ## License
 
 ### Unique part of the repository
