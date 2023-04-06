@@ -13,8 +13,8 @@ Best for:
 
 | Environment             | Prerequisites                                                             |
 | ----------------------- | ------------------------------------------------------------------------- |
-| Unity 2019.1 or later   | None                                                                      |
-| Unity 2018.4 or earlier | .NET 4.x Equivalent                                                       |
+| Unity 2019.2 or later   | None                                                                      |
+| Unity 2019.1 or earlier | .NET 4.x Equivalent                                                       |
 | .NET Project            | [System.Memory](https://www.nuget.org/packages/System.Memory/) from NuGet |
 
 ## Download
